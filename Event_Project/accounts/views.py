@@ -104,11 +104,7 @@ def reset_pass(request):
             
             # FIX: Change 'admin@eventpro.com' to None to use your verified Brevo email
             send_mail(subject, message, None, [email])
-
-            subject = "Password Reset Requested"
-            message = f"Click the link to reset your password: {reset_url}"
-            send_mail(subject, message, 'admin@eventpro.com', [email])
-
+            
             messages.success(request, "Verification successful! Check your terminal for the link.")
             return render(request, "password_reset.html")
 
@@ -164,3 +160,4 @@ def admin_dashboard(request):
 def main_page(request):
 
     return render(request,"main.html")
+
