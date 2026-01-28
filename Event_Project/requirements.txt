@@ -1,3 +1,9 @@
-django
-gunicorn
-import_export
+asgiref==3.11.0
+django==6.0.1
+gunicorn==24.1.1
+import_export==0.3.1
+packaging==26.0
+sqlparse==0.5.5
+dj-database-url==2.1.0
+whitenoise==6.7.0
+psycopg2-binary==2.9.9
