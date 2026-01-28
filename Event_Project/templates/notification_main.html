@@ -1,0 +1,45 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+<body>
+<!-- templates/notification_main.html -->
+
+<div id="d1">
+    <h2>Latest Notifications</h2>
+    {% for event in events %}
+        <div id="event">
+            <h3>{{ event.title }}</h3>
+            <p>{{ event.details }}</p>
+        </div>
+    {% empty %}
+        <p>No notifications at this time.</p>
+    {% endfor %}
+</div>
+
+<style>
+#d1 h2 {
+    text-align: center;
+    border-bottom: 2px solid black;
+    padding-bottom: 5px;
+}
+
+#event {
+    border: 1px solid #333;
+    margin: 10px;
+    background-color: #f0f0f0;
+    padding: 8px;
+    border-radius: 5px;
+}
+
+#d1 h3 {
+    margin-top: 0;
+}
+</style>
+
+    </div> 
+</body>
+</html>

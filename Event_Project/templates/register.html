@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | Join Us</title>
+    <link rel="icon" type="image/png" href="{% static 'user.png' %}">
+    <link rel="stylesheet" href="{% static 'register-style.css' %}">
+</head>
+<body>
+    
+    <img src="{% static '09_11_17_071839_UGI-removebg-preview.png' %}" class="logo" alt="Logo">
+
+    <div class="register">
+        <h2>Create Account</h2>
+{% if messages %}
+        {% for message in messages %}
+            <div class="error-msg">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-grid">
+                <div class="role-section">
+                <p>Select Your Role:</p>
+                    <div class="radio-group">
+                        <input type="radio" id="Teacher" name="role" value="Teacher" required>
+                        <label for="Teacher">Teacher</label>
+
+                        <input type="radio" id="Student" name="role" value="Student">
+                        <label for="Student">Student</label>
+                    </div>
+                </div>  
+                <div class="input-box">
+                    <label>First Name</label>
+                    <input type="text" name="first_name" placeholder="XYZ" id='name' required>
+                </div>
+                <div class="input-box">
+                    <label>Last Name</label>
+                    <input type="text" name="last_name" placeholder="XYZ" id='name' required>
+                </div>
+
+                <div class="input-box">
+                    <label>ID Number</label>
+                    <input type="text" name="username" placeholder="21240XXX" id='College_id' required>
+                </div>
+                <div class="input-box">
+                    <label>E-MAIL</label>
+                    <input type="email" name="email" placeholder="name@domain"required>
+                </div>
+                <div class="input-box">
+                    <label>Password</label>
+                    <input type="password" name="password" placeholder="Enter Password" required>
+                </div>
+
+                <div class="input-box">
+                    <label>Confirm Password</label>
+                    <input type="password" name="confirm_password" placeholder="Enter Password" required>
+                </div>
+            </div>
+            <p id="idMessage"></p>
+            <button type="submit" class="reg-btn" disabled>Register Now</button>
+        </form>
+
+        <p class="footer-text">Already have an account? <a href="{% url 'login' %}">Log In</a></p>
+    </div>
+    <script src="{% static 'register.js' %}"></script>
+</body>
+</html>

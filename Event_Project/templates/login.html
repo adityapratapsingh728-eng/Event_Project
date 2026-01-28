@@ -1,0 +1,44 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="icon" type="image/png" href="{% static 'user.png' %}">
+    <link rel="stylesheet" href="/static/login-style.css">
+</head>
+<body>
+    
+    <img src="/static/09_11_17_071839_UGI-removebg-preview.png" alt="Image Not Available">
+
+    <div class="login">
+        <h2>Welcome Back!</h2>
+        <p class="start">Please enter your details</p>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="error-msg">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+        <form action="" method="POST">
+            {% csrf_token %}
+            <div class="input">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" placeholder="Enter your username" required>
+            </div>
+
+            <div class="input">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            </div>
+            </div>
+            <p class="forgot">Forgot Password?<a href="{% url 'reset_password' %}">Click Here</a></p>
+            <button type="submit" class="login-btn">Log In</button>
+        </form>
+
+        <p class="signup">Don't have an account? <a href="{% url 'register' %}">Sign up</a></p>
+    </div>
+
+</body>
+</html>
