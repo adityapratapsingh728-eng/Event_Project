@@ -7,5 +7,6 @@ sqlparse
 dj-database-url
 whitenoise
 psycopg2-binary
+django-anymail[brevo]
 
 
