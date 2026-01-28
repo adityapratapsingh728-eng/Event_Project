@@ -10,7 +10,7 @@ from django.utils.encoding import force_bytes
 from django.core.mail import send_mail
 from django.contrib.auth.forms import SetPasswordForm
 from django.utils.encoding import force_str
-
+from django.urls import reverse
 
 def register_view(request):
     if request.method == "POST":
@@ -160,4 +160,5 @@ def admin_dashboard(request):
 def main_page(request):
 
     return render(request,"main.html")
+
 
