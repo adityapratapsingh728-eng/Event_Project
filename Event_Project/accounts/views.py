@@ -96,7 +96,14 @@ def reset_pass(request):
             token = default_token_generator.make_token(user)
             uid = urlsafe_base64_encode(force_bytes(user.pk))
 
-            reset_url = f"http://127.0.0.1:8000/reset_password/{uid}/{token}/"
+            reset_path = reverse('password_reset_confirm', kwargs={'uidb64': uid, 'token': token})
+            reset_url = request.build_absolute_uri(reset_path)
+
+            subject = "Password Reset Requested"
+            message = f"Click the link to reset your password: {reset_url}"
+            
+            # FIX: Change 'admin@eventpro.com' to None to use your verified Brevo email
+            send_mail(subject, message, None, [email])
 
             subject = "Password Reset Requested"
             message = f"Click the link to reset your password: {reset_url}"
@@ -155,4 +162,5 @@ def admin_dashboard(request):
     return render(request,"admin_dashboard.html")
 
 def main_page(request):
+
     return render(request,"main.html")
