@@ -83,14 +83,27 @@ WSGI_APPLICATION = 'Event_Project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-DATABASES={
-    "default":{
-        "ENGINE":"django.db.backends.sqlite3",
-        "NAME":BASE_DIR / "db.sqlite3",
+# --- FIX DATABASE SECTION ---
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
     }
 }
 database_url = os.environ.get("DATABASE_URL")
-DATABASES["default"] = dj_database_url.parse(database_url)
+if database_url:
+    DATABASES["default"] = dj_database_url.parse(database_url)
+
+# --- FIX EMAIL SECTION (BREVO API) ---
+# We use Anymail because Render blocks Gmail SMTP on the free tier
+INSTALLED_APPS += ['anymail'] 
+
+ANYMAIL = {
+    "BREVO_API_KEY": os.environ.get("BREVO_API_KEY"),
+}
+EMAIL_BACKEND = "anymail.backends.brevo.EmailBackend"
+DEFAULT_FROM_EMAIL = "adityapratapsingh728@gmail.com" # Must match your Brevo sender email
+
 
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
@@ -154,3 +167,4 @@ orig_getaddrinfo = socket.getaddrinfo
 def getaddrinfo_ipv4(host, port, family=0, type=0, proto=0, flags=0):
     return orig_getaddrinfo(host, port, socket.AF_INET, type, proto, flags)
 socket.getaddrinfo = getaddrinfo_ipv4
+
